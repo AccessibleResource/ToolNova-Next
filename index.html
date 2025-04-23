@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToolNova Next</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #f0f0f0, #e0e0e0);
+      transition: background 0.5s, color 0.5s;
+      color: #333;
+    }
+
+    .dark-mode {
+      background: linear-gradient(to bottom right, #1a1a1a, #2c2c2c);
+      color: #fff;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      background-color: #4b90e2;
+      color: white;
+    }
+
+    .section {
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tool-title {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .tool-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #4b90e2;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #3a75c4;
+    }
+
+    .info-bar {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .centered-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .toggle-mode {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="greeting">Welcome to ToolNova Next</h1>
+    <p>Created by S M Ripon and the team at Accessible Resource</p>
+    <p>We will continue to add new features and updates. If you face any issues, please let us know.</p>
+
+    <!-- Telegram & YouTube Buttons -->
+    <div class="centered-buttons">
+      <button onclick="openLink('https://t.me/shopnotamal')">Join Us on Telegram</button>
+      <button onclick="openLink('https://youtube.com/@accessibleresource?si=w8VRPo6GjV4R0RGA')">Join Us on YouTube</button>
+    </div>
+
+    <!-- Info bar -->
+    <div class="info-bar">
+      <span id="currentTime">Time:</span>
+      <span id="currentDate">Date:</span>
+      <span id="batteryLevel">Battery:</span>
+    </div>
+
+    <!-- Mode toggle -->
+    <div class="toggle-mode">
+      <button onclick="toggleMode()">Toggle Light/Dark Mode</button>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="tool-row">
+      <span class="tool-title">Tool Fusion AI</span>
+      <button onclick="openLink('https://accessibleresource.github.io/ToolFusion-AI/')">Open Tool Fusion AI</button>
+    </div>
+    <div class="tool-row">
+      <span class="tool-title">Smart Utility Tool</span>
+      <button onclick="openLink('https://accessibleresource.github.io/Smart-Utility-Tool/')">Open Smart Utility Tool</button>
+    </div>
+    <div class="tool-row">
+      <span class="tool-title">Text Tool Zone</span>
+      <button onclick="openLink('https://accessibleresource.github.io/Text-Tools-Zone/')">Open Text Tool Zone</button>
+    </div>
+    <div class="tool-row">
+      <span class="tool-title">Gaming Tool</span>
+      <button onclick="openLink('https://accessibleresource.github.io/Accessible-Resource-Hub/')">Open Gaming Tool</button>
+    </div>
+  </div>
+
+  <script>
+    function updateTimeDateBattery() {
+      const now = new Date();
+      document.getElementById("currentTime").textContent = "Time: " + now.toLocaleTimeString();
+      document.getElementById("currentDate").textContent = "Date: " + now.toLocaleDateString();
+
+      if (navigator.getBattery) {
+        navigator.getBattery().then(battery => {
+          const level = Math.round(battery.level * 100);
+          document.getElementById("batteryLevel").textContent = "Battery: " + level + "%";
+        });
+      } else {
+        document.getElementById("batteryLevel").textContent = "Battery: N/A";
+      }
+    }
+
+    function openLink(url) {
+      window.open(url, '_blank');
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function setGreeting() {
+      const hour = new Date().getHours();
+      let greet = "Good Evening";
+      if (hour < 12) greet = "Good Morning";
+      else if (hour < 18) greet = "Good Afternoon";
+
+      document.getElementById("greeting").textContent = `${greet}! Welcome to ToolNova Next`;
+    }
+
+    setGreeting();
+    updateTimeDateBattery();
+    setInterval(updateTimeDateBattery, 30000);
+  </script>
+</body>
+</html>
